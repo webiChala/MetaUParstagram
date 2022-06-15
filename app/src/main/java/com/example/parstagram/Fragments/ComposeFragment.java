@@ -20,8 +20,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.parstagram.LoginActivity;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
+import com.example.parstagram.databinding.ActivityHomeBinding;
 import com.example.parstagram.databinding.FragmentComposeBinding;
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -43,8 +45,9 @@ public class ComposeFragment extends Fragment {
     private File photoFile;
     FragmentComposeBinding binding;
 
+
     public ComposeFragment() {
-        super(R.layout.fragment_compose);
+        //super(R.layout.fragment_compose);
         // Required empty public constructor
     }
 
@@ -52,32 +55,30 @@ public class ComposeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // fancy_fragment.xml -> FancyFragmentBinding
+        // Inflate the layout for this fragment
+        // fragment_compose.xml -> FragmentComposeBinding
         binding = FragmentComposeBinding.inflate(getLayoutInflater(), container, false);
 
         // layout of fragment is stored in a special property called root
         View view = binding.getRoot();
 
-        binding.ibTakePicture.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "Camera clicked!");
-                Toast.makeText(getContext(), "Button clicked", Toast.LENGTH_SHORT).show();
-                onLaunchCamera(v);
-            }
-        });
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_compose, container, false);
+        // TODO Use fields...
+        // binding.
+        return view;
+        //return inflater.inflate(R.layout.fragment_compose, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        queryPosts();
+        binding.ivPostImage.setVisibility(View.GONE);
+        binding.ibTakePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLaunchCamera(v);
+            }
+        });
         binding.btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +88,7 @@ public class ComposeFragment extends Fragment {
                     return;
                 }
                 ParseUser user = ParseUser.getCurrentUser();
-                if (photoFile != null) {
+                if (photoFile != null && binding.ivPostImage.getDrawable() != null) {
                     submitPost(description, user, photoFile);
                 } else{
                     Toast.makeText(getContext(), "Take a picture", Toast.LENGTH_SHORT).show();
@@ -101,7 +102,7 @@ public class ComposeFragment extends Fragment {
 
 
 
-    private   void onLaunchCamera(View view) {
+    private  void onLaunchCamera(View view) {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access
@@ -131,6 +132,9 @@ public class ComposeFragment extends Fragment {
                 // Load the taken image into a preview
 
                 binding.ivPostImage.setImageBitmap(takenImage);
+                if (binding.ivPostImage.getDrawable() != null) {
+                    binding.ivPostImage.setVisibility(View.VISIBLE);
+                }
             } else { // Result was a failure
                 Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
@@ -161,7 +165,7 @@ public class ComposeFragment extends Fragment {
         Post post = new Post();
         post.setDescription(description);
         post.setUser(user);
-        //post.setImage(ParseFile(file));
+        post.setImage(new ParseFile(file));
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -169,6 +173,10 @@ public class ComposeFragment extends Fragment {
                     Log.e(TAG, "Error while saving post", e);
                 } else {
                     Toast.makeText(getContext(), "Successfully posted!", Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.flContainer, new HomeFragment())
+                            .commit();
                 }
             }
         });
