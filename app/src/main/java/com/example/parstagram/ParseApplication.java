@@ -3,6 +3,7 @@ package com.example.parstagram;
 import android.app.Application;
 
 import com.example.parstagram.Models.Post;
+import com.example.parstagram.Models.User;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -12,6 +13,7 @@ public class ParseApplication extends Application {
         super.onCreate();
 
         ParseObject.registerSubclass(Post.class);
+        ParseObject.registerSubclass(User.class);
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId(getString(R.string.back4app_app_id))
                 .clientKey(getString(R.string.back4app_client_key))

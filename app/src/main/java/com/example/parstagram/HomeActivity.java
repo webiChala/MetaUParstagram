@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.parstagram.Fragments.ComposeFragment;
-import com.example.parstagram.Fragments.HomeFragment;
+import com.example.parstagram.Fragments.PostsFragment;
 import com.example.parstagram.Fragments.ProfileFragment;
 import com.example.parstagram.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationBarView;
@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
                 Fragment fragmentToShow = null;
                 switch (item.getItemId()) {
                     case R.id.action_home:
-                        fragmentToShow = new HomeFragment();
+                        fragmentToShow = new PostsFragment();
                         break;
                     case R.id.action_post:
                         fragmentToShow = new ComposeFragment();

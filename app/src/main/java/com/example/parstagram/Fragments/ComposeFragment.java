@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.parstagram.LoginActivity;
 import com.example.parstagram.Models.Post;
+import com.example.parstagram.Models.User;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.ActivityHomeBinding;
 import com.example.parstagram.databinding.FragmentComposeBinding;
@@ -65,13 +66,11 @@ public class ComposeFragment extends Fragment {
         // TODO Use fields...
         // binding.
         return view;
-        //return inflater.inflate(R.layout.fragment_compose, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        queryPosts();
         binding.ivPostImage.setVisibility(View.GONE);
         binding.ibTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +163,7 @@ public class ComposeFragment extends Fragment {
 
         Post post = new Post();
         post.setDescription(description);
-        post.setUser(user);
+        post.setUser((User) user);
         post.setImage(new ParseFile(file));
         post.saveInBackground(new SaveCallback() {
             @Override
@@ -175,29 +174,8 @@ public class ComposeFragment extends Fragment {
                     Toast.makeText(getContext(), "Successfully posted!", Toast.LENGTH_SHORT).show();
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.flContainer, new HomeFragment())
+                            .replace(R.id.flContainer, new PostsFragment())
                             .commit();
-                }
-            }
-        });
-    }
-
-    //retrieve all post method
-    private void queryPosts() {
-
-        //instantiate a query variable that has methods to grab all posts
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Error while getting posts", e);
-                    return;
-
-                }
-                for (Post post : posts) {
-                    Log.i(TAG, "Post: " + post.getDescription());
                 }
             }
         });
