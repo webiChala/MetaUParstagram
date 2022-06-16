@@ -1,16 +1,20 @@
 package com.example.parstagram.Fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.parstagram.Adapters.PostsAdapter;
 import com.example.parstagram.Models.Post;
@@ -48,10 +52,26 @@ public class PostsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), allPosts);
         binding.rvPosts.setAdapter(adapter);
         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Setup refresh listener which triggers new data loading
+        binding.swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                queryPosts();
+            }
+        });
+
+        // Configure the refreshing colors
+        binding.swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         queryPosts();
 
     }
@@ -62,6 +82,8 @@ public class PostsFragment extends Fragment {
         //instantiate a query variable that has methods to grab all posts
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.setLimit(20);
+        query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -73,8 +95,10 @@ public class PostsFragment extends Fragment {
                 for (Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription());
                 }
+                allPosts.clear();
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
+                binding.swipeContainer.setRefreshing(false);
             }
         });
     }
