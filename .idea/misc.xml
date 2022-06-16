@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/drawable/ic_meta_logo__.xml" value="0.137" />
         <entry key="app/src/main/res/drawable/ic_save_instagram_icon.xml" value="0.137" />
         <entry key="app/src/main/res/drawable/login_edit_text_border.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/placeholder.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />

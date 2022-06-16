@@ -1,14 +1,22 @@
 package com.example.parstagram.Adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.ItemPostBinding;
@@ -59,9 +67,30 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
             ParseFile image = post.getImage();
             if (image !=  null) {
-                Glide.with(context).load(image.getUrl()).into(itembinding.ivPostImageHome);
+
+                Glide.with(context)
+                        .load(image.getUrl())
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                itembinding.progressBar.setVisibility(View.VISIBLE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                itembinding.progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .into(itembinding.ivPostImageHome);
+
+//                Glide.with(context).load(image.getUrl())
+//                        .transition(DrawableTransitionOptions.withCrossFade())
+//                        .into(itembinding.ivPostImageHome);
 
             } else {
+
                 itembinding.ivPostImageHome.setVisibility(View.GONE);
             }
         }
