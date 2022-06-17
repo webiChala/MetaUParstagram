@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:nestedScrollingEnabled="true"
+    android:fitsSystemWindows="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detailtoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
+
+            <ImageButton
+                android:id="@+id/ibGoBack"
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="-10dp"
+                android:background="@color/white"
+                android:src="?attr/homeAsUpIndicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvGoBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Comments"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/ivPostDetailProfile"
+        android:layout_width="52dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailtoolbar"
+        app:srcCompat="@drawable/ic_instagram_user_icon" />
+
+    <TextView
+        android:id="@+id/tvPostDetailUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="poster username"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivPostDetailProfile"
+        app:layout_constraintTop_toBottomOf="@id/detailtoolbar"
+        tools:text="hulu"
+        android:fitsSystemWindows="true"/>
+
+    <ImageView
+        android:id="@+id/ivPostDetailImageHome"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostDetailProfile"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ProgressBar
+        android:id="@+id/PostDetailProgressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="16dp"
+        android:max="100"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostDetailProfile" />
+
+    <ImageButton
+        android:id="@+id/ibPostDetailLike"
+        android:layout_width="24sp"
+        android:layout_height="24sp"
+        android:layout_marginStart="8dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_instagram_heart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivPostDetailComment"
+        tools:srcCompat="@drawable/ic_instagram_heart" />
+
+    <ImageButton
+        android:id="@+id/ivPostDetailComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:contentDescription="click here to comment"
+        app:layout_constraintStart_toEndOf="@+id/ibPostDetailLike"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostDetailImageHome"
+        app:srcCompat="@drawable/ic_instagram_comment_icon" />
+
+    <ImageButton
+        android:id="@+id/ivPostDetailShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/ivPostDetailComment"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostDetailImageHome"
+        app:srcCompat="@drawable/ic_direct_message_icon" />
+
+    <ImageButton
+        android:id="@+id/ibPostDetailSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostDetailImageHome"
+        app:srcCompat="@drawable/ic_save_instagram_icon" />
+
+    <TextView
+        android:id="@+id/tvPostDetailDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostDetailComment" />
+
+    <TextView
+        android:id="@+id/tvPostDetailTimeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="21 hours ago"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostDetailDescription" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.parstagram;
+package com.example.parstagram.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.parstagram.databinding.ActivityLoginBinding;
 import com.example.parstagram.databinding.ActivitySignupBinding;
 import com.parse.ParseException;
 import com.parse.ParseUser;

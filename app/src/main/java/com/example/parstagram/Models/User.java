@@ -4,8 +4,12 @@ import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
+import org.parceler.Parcel;
+
+//@Parcel
 @ParseClassName("_User")
 public class User extends ParseUser {
+
     public static final String KEY_USERIMAGE = "userImage";
 
     public ParseFile getImage() {
@@ -14,5 +18,9 @@ public class User extends ParseUser {
 
     public void setImage(ParseFile parseFile) {
         put(KEY_USERIMAGE, parseFile);
+    }
+
+    public User(){
+
     }
 }
