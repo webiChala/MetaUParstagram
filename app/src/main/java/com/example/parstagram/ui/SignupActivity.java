@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.parstagram.Models.User;
 import com.example.parstagram.databinding.ActivitySignupBinding;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -34,8 +35,8 @@ public class SignupActivity extends AppCompatActivity {
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = binding.email.getText().toString();
-                String name = binding.name.getText().toString();
+//                String email = binding.email.getText().toString();
+//                String name = binding.name.getText().toString();
                 String password = binding.pwdSignUp.getText().toString();
                 String username = binding.username.getText().toString();
 
@@ -53,7 +54,7 @@ public class SignupActivity extends AppCompatActivity {
     private void SignUp(String username, String password) {
 
         // Create the ParseUser
-        ParseUser user = new ParseUser();
+        User user = new User();
         // Set core properties
         user.setUsername(username);
         user.setPassword(password);
@@ -62,6 +63,7 @@ public class SignupActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     // Hooray! Let them use the app now.
+                    Log.i(TAG, "it worked!");
                     goToHomeActivity();
                 } else {
                     // Sign up didn't succeed. Look at the ParseException

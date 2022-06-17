@@ -18,12 +18,15 @@ import android.view.WindowManager;
 
 import com.example.parstagram.Adapters.PostsAdapter;
 import com.example.parstagram.Models.Post;
+import com.example.parstagram.Models.User;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.FragmentComposeBinding;
 import com.example.parstagram.databinding.FragmentPostBinding;
+import com.example.parstagram.databinding.ItemPostBinding;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,8 @@ public class PostsFragment extends Fragment {
         binding.rvPosts.setAdapter(adapter);
         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
+
         // Setup refresh listener which triggers new data loading
         binding.swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -73,6 +78,8 @@ public class PostsFragment extends Fragment {
                 android.R.color.holo_red_light);
 
         queryPosts();
+
+
 
     }
 
@@ -92,13 +99,14 @@ public class PostsFragment extends Fragment {
                     return;
 
                 }
-                for (Post post : posts) {
-                    Log.i(TAG, "Post: " + post.getDescription());
-                }
+//                for (Post post : posts) {
+//                    Log.i(TAG, "Post: " + post.getDescription());
+//                }
                 allPosts.clear();
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
                 binding.swipeContainer.setRefreshing(false);
+
             }
         });
     }
