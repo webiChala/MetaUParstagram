@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/drawable/ic_save_instagram_icon.xml" value="0.137" />
         <entry key="app/src/main/res/drawable/login_edit_text_border.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/placeholder.xml" value="0.12" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_post_detail.xml" value="0.21428571428571427" />
@@ -33,7 +33,7 @@
         <entry key="app/src/main/res/layout/fragment_compose.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_post.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_post.xml" value="0.345679012345679" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.335" />
         <entry key="app/src/main/res/xml/fileprovider.xml" value="0.1" />

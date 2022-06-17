@@ -105,6 +105,7 @@ public class PostsFragment extends Fragment {
                 allPosts.clear();
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
+                Log.i(TAG, allPosts.get(0).likeCountDisplayText() );
                 binding.swipeContainer.setRefreshing(false);
 
             }

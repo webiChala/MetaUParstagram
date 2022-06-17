@@ -77,7 +77,6 @@ public class ProfileFragment extends Fragment {
         binding.rvUserPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         User currentUser = (User) ParseUser.getCurrentUser();
         Log.i(TAG, "Url: " + currentUser);
-        //Glide.with(getContext()).load(currentUser.getImage().getUrl()).into(binding.ivProfileImage);
         queryPosts();
 
 
@@ -105,6 +104,10 @@ public class ProfileFragment extends Fragment {
                 }
                 allPosts.clear();
                 allPosts.addAll(posts);
+                if (posts.size() > 0) {
+                    Glide.with(getContext()).load(posts.get(0).getUser().getImage().getUrl()).into(binding.ivProfileImage);
+
+                }
                 adapter.notifyDataSetChanged();
                 //binding.swipeContainer.setRefreshing(false);
 

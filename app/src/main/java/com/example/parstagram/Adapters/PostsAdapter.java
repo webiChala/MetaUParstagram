@@ -75,6 +75,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             itembinding.tvUsername.setText(post.getUser().getUsername());
             itembinding.tvDescriptionUsername.setText(post.getUser().getUsername());
 
+            itembinding.tvLikeCount.setText(post.likeCountDisplayText());
+            itembinding.tvTimeStamp.setText(post.getRelativeCreatedDate());
+
+            List<String> getLikedBy = post.getLike();
+            ParseUser currentUser = ParseUser.getCurrentUser();
+
+            if (getLikedBy.contains(currentUser.getObjectId())) {
+
+                itembinding.ibLike.setBackgroundResource(R.drawable.ic_red_heart);
+            } else{
+
+                itembinding.ibLike.setBackgroundResource(R.drawable.ic_instagram_heart);
+            }
+
             if (post.getUser().getImage() != null) {
                 Glide.with(context).load(post.getUser().getImage().getUrl()).centerCrop().circleCrop().into(itembinding.ivProfile);
 
@@ -89,12 +103,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                         getLikedBy.remove(currentUser.getObjectId());
                         post.setUserLike(getLikedBy);
                         itembinding.ibLike.setBackgroundResource(R.drawable.ic_instagram_heart);
-                        itembinding.tvLikeCount.setText(String.valueOf(post.getLike().size()));
+                        itembinding.tvLikeCount.setText(post.likeCountDisplayText());
                     } else{
                         getLikedBy.add(currentUser.getObjectId());
                         post.setUserLike(getLikedBy);
                         itembinding.ibLike.setBackgroundResource(R.drawable.ic_red_heart);
-                        itembinding.tvLikeCount.setText(String.valueOf(post.getLike().size()));
+                        itembinding.tvLikeCount.setText(post.likeCountDisplayText());
                     }
                 }
             });

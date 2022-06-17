@@ -48,7 +48,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 .into(binding.ivPostDetailProfile);
         binding.tvPostDetailDescription.setText(post.getDescription());
         binding.tvPostDetailUsername.setText(post.getUser().getUsername());
-        binding.tvPostDetailTimeStamp.setText(getRelativeTimeAgo(post.getCreatedAt().toString()));
+        binding.tvPostDetailTimeStamp.setText(post.getRelativeCreatedDate());
         Glide.with(this)
                 .load(post.getImage().getUrl())
                 .listener(new RequestListener<Drawable>() {
@@ -67,20 +67,5 @@ public class PostDetailActivity extends AppCompatActivity {
                 .into(binding.ivPostDetailImageHome);
     }
 
-    public String getRelativeTimeAgo(String rawJsonDate) {
-        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
-        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
-        sf.setLenient(true);
 
-        String relativeDate = "";
-        try {
-            long dateMillis = sf.parse(rawJsonDate).getTime();
-            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-
-        return relativeDate;
-    }
 }
