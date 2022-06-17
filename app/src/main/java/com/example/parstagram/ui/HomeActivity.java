@@ -1,6 +1,6 @@
 
 
-package com.example.parstagram;
+package com.example.parstagram.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.parstagram.Fragments.ComposeFragment;
 import com.example.parstagram.Fragments.PostsFragment;
 import com.example.parstagram.Fragments.ProfileFragment;
+import com.example.parstagram.R;
 import com.example.parstagram.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationBarView;
 

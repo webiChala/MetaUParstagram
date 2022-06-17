@@ -17,25 +17,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.parstagram.LoginActivity;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.Models.User;
 import com.example.parstagram.R;
-import com.example.parstagram.databinding.ActivityHomeBinding;
 import com.example.parstagram.databinding.FragmentComposeBinding;
-import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
-import java.util.List;
 
 
 public class ComposeFragment extends Fragment {

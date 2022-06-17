@@ -1,6 +1,7 @@
 package com.example.parstagram.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,10 @@ import com.bumptech.glide.request.target.Target;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.ItemPostBinding;
+import com.example.parstagram.ui.PostDetailActivity;
 import com.parse.ParseFile;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -52,11 +56,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         return posts.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ItemPostBinding itembinding;
         public ViewHolder(ItemPostBinding binding) {
             super(binding.getRoot());
             itembinding = binding;
+            itembinding.getRoot().setOnClickListener(this);
         }
 
         public void bind(Post post) {
@@ -93,6 +98,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
                 itembinding.ivPostImageHome.setVisibility(View.GONE);
             }
+        }
+
+        @Override
+        public void onClick(View v) {
+            Post post = posts.get(getAdapterPosition());
+            Intent i = new Intent(context, PostDetailActivity.class);
+            i.putExtra("USER_POST", Parcels.wrap(post));
+            context.startActivity(i);
+
         }
     }
 

@@ -4,6 +4,7 @@
     package="com.example.parstagram">
 
     <queries>
+
         <!-- Camera -->
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -24,6 +25,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Parstagram"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.PostDetailActivity"
+
+            android:parentActivityName=".ui.HomeActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -34,11 +40,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/fileprovider" />
         </provider>
+
         <activity
-            android:name=".SignupActivity"
+            android:name=".ui.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,13 +53,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".LoginActivity"
-            android:exported="true"></activity>
+            android:name=".ui.LoginActivity"
+            android:exported="true" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.HomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.Parstagram"/>
+            android:theme="@style/Theme.Parstagram" />
 
         <meta-data
             android:name="com.parse.SERVER_URL"
