@@ -2,6 +2,7 @@ package com.example.parstagram.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,14 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.parstagram.Models.Post;
+import com.example.parstagram.Models.User;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.ItemPostBinding;
 import com.example.parstagram.ui.PostDetailActivity;
+import com.parse.Parse;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -62,13 +67,37 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             super(binding.getRoot());
             itembinding = binding;
             itembinding.getRoot().setOnClickListener(this);
+
         }
 
         public void bind(Post post) {
             itembinding.tvDescription.setText(post.getDescription());
             itembinding.tvUsername.setText(post.getUser().getUsername());
             itembinding.tvDescriptionUsername.setText(post.getUser().getUsername());
-            Glide.with(context).load(post.getUser().getImage().getUrl()).centerCrop().circleCrop().into(itembinding.ivProfile);
+
+            if (post.getUser().getImage() != null) {
+                Glide.with(context).load(post.getUser().getImage().getUrl()).centerCrop().circleCrop().into(itembinding.ivProfile);
+
+            }
+
+            itembinding.ibLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    List<String> getLikedBy = post.getLike();
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+                    if (getLikedBy.contains(currentUser.getObjectId())) {
+                        getLikedBy.remove(currentUser.getObjectId());
+                        post.setUserLike(getLikedBy);
+                        itembinding.ibLike.setBackgroundResource(R.drawable.ic_instagram_heart);
+                        itembinding.tvLikeCount.setText(String.valueOf(post.getLike().size()));
+                    } else{
+                        getLikedBy.add(currentUser.getObjectId());
+                        post.setUserLike(getLikedBy);
+                        itembinding.ibLike.setBackgroundResource(R.drawable.ic_red_heart);
+                        itembinding.tvLikeCount.setText(String.valueOf(post.getLike().size()));
+                    }
+                }
+            });
 
             ParseFile image = post.getImage();
             if (image !=  null) {
