@@ -27,7 +27,6 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.PostDetailActivity"
-
             android:parentActivityName=".ui.HomeActivity"
             android:exported="false" />
 

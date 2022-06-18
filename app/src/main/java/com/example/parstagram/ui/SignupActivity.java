@@ -21,11 +21,7 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Use view binding
         binding = ActivitySignupBinding.inflate(getLayoutInflater());
-
-        // layout of activity is stored in a special property called root
         View view = binding.getRoot();
         setContentView(view);
 
@@ -35,13 +31,10 @@ public class SignupActivity extends AppCompatActivity {
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String email = binding.email.getText().toString();
-//                String name = binding.name.getText().toString();
                 String password = binding.pwdSignUp.getText().toString();
                 String username = binding.username.getText().toString();
 
                 if (password == null || username == null || password == "" || username == "") {
-                    //we can notify the user the problem if we want
                     binding.tvErrorSignUp.setVisibility(View.VISIBLE);
                     return;
 
@@ -62,12 +55,8 @@ public class SignupActivity extends AppCompatActivity {
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    // Hooray! Let them use the app now.
-                    Log.i(TAG, "it worked!");
                     goToHomeActivity();
                 } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    Log.e(TAG, "Sign up not successful!", e);
                     binding.tvErrorSignUp.setVisibility(View.VISIBLE);
                 }
             }

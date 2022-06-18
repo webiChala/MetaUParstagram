@@ -29,8 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_home);
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
-
-        // layout of activity is stored in a special property called root
         View view = binding.getRoot();
         setContentView(view);
 
@@ -55,33 +53,11 @@ public class HomeActivity extends AppCompatActivity {
                 if (fragmentToShow != null) {
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.flContainer, fragmentToShow).commit();
-
                 }
-
                 return true;
             }
-
-
         });
-
         binding.bottomNavigation.setSelectedItemId(R.id.action_home);
-
-
-//        binding.btnLogOut.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                //Log user out
-//                ParseUser.logOut();
-//                ParseUser currentUser = ParseUser.getCurrentUser();
-//
-//                Intent i = new Intent(HomeActivity.this, LoginActivity.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
-
-
     }
 
 }

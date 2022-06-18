@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 
 @ParseClassName("Post")
-//@Parcel
 public class Post extends ParseObject {
 
     public static final String KEY_DESCRIPTION = "description";

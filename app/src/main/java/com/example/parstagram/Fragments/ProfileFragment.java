@@ -43,8 +43,6 @@ public class ProfileFragment extends Fragment {
 
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,8 +62,6 @@ public class ProfileFragment extends Fragment {
         binding.tvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Log user out
                 ParseUser.logOut();
                 ParseUser currentUser = ParseUser.getCurrentUser();
 
@@ -76,16 +72,11 @@ public class ProfileFragment extends Fragment {
         binding.tvProfileUsername.setText(ParseUser.getCurrentUser().getUsername().toString());
         binding.rvUserPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         User currentUser = (User) ParseUser.getCurrentUser();
-        Log.i(TAG, "Url: " + currentUser);
         queryPosts();
-
-
-
     }
 
     //retrieve all post of current user
     private void queryPosts() {
-
         //instantiate a query variable that has methods to grab all posts
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
@@ -95,22 +86,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Error while getting posts", e);
                     return;
-
-                }
-                for (Post post : posts) {
-                    Log.i(TAG, "Post: " + post.getDescription());
                 }
                 allPosts.clear();
                 allPosts.addAll(posts);
                 if (posts.size() > 0) {
                     Glide.with(getContext()).load(posts.get(0).getUser().getImage().getUrl()).into(binding.ivProfileImage);
-
                 }
                 adapter.notifyDataSetChanged();
-                //binding.swipeContainer.setRefreshing(false);
-
             }
         });
     }

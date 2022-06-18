@@ -26,10 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Use view binding
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
-
-        // layout of activity is stored in a special property called root
         View view = binding.getRoot();
         setContentView(view);
 
@@ -45,14 +42,12 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "onClick: Login button clicked!");
                 String username = binding.username.getText().toString();
                 String password = binding.pwd.getText().toString();
                 LoginUser(username, password);
             }
         });
 
-        //if a user clicks on sign up
         binding.tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         binding.username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //do nothing
             }
 
             @Override
@@ -93,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //if there is any change tvError should be gone
                 binding.tvError.setVisibility(View.GONE);
             }
 
@@ -111,9 +104,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e!= null) {
-                    //That means there is an issue
-                    Log.e(TAG, "Issue with login", e);
-                    //Set the error message visible
                     binding.tvError.setVisibility(View.VISIBLE);
                     return;
                 }

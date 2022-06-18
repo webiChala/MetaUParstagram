@@ -133,10 +133,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                         })
                         .into(itembinding.ivPostImageHome);
 
-//                Glide.with(context).load(image.getUrl())
-//                        .transition(DrawableTransitionOptions.withCrossFade())
-//                        .into(itembinding.ivPostImageHome);
-
             } else {
 
                 itembinding.ivPostImageHome.setVisibility(View.GONE);

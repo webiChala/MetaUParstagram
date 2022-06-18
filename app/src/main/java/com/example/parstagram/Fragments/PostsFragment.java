@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.parstagram.Adapters.PostsAdapter;
 import com.example.parstagram.Models.Post;
@@ -40,7 +41,6 @@ public class PostsFragment extends Fragment {
     private List<Post> allPosts;
 
     public PostsFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -61,9 +61,6 @@ public class PostsFragment extends Fragment {
         binding.rvPosts.setAdapter(adapter);
         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-
-        // Setup refresh listener which triggers new data loading
         binding.swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -71,15 +68,12 @@ public class PostsFragment extends Fragment {
             }
         });
 
-        // Configure the refreshing colors
         binding.swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
         queryPosts();
-
-
 
     }
 
@@ -95,17 +89,11 @@ public class PostsFragment extends Fragment {
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Error while getting posts", e);
                     return;
-
                 }
-//                for (Post post : posts) {
-//                    Log.i(TAG, "Post: " + post.getDescription());
-//                }
                 allPosts.clear();
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
-                Log.i(TAG, allPosts.get(0).likeCountDisplayText() );
                 binding.swipeContainer.setRefreshing(false);
 
             }
